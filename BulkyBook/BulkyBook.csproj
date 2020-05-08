@@ -41,8 +41,5 @@
     <Folder Include="Areas\Customer\Controllers\" />
     <Folder Include="Areas\Customer\Views\" />
     <Folder Include="Areas\Customer\Views\Home\" />
-    <Folder Include="Areas\Admin\" />
-    <Folder Include="Areas\Admin\Views\" />
-    <Folder Include="Areas\Admin\Controllers\" />
   </ItemGroup>
 </Project>
