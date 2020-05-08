@@ -8,4 +8,33 @@ using Microsoft.AspNetCore.Mvc;namespace BulkyBook.Areas.Admin.Controllers{ 
             }            return View(category);        }
 
         #region API CALLS
-        [HttpGet]        public IActionResult GetAll()        {            var allObj = _unitOfWork.Category.GetAll();            return Json(new { data = allObj });        }        #endregion    }}
+        [HttpGet]        public IActionResult GetAll()        {            var allObj = _unitOfWork.Category.GetAll();            return Json(new { data = allObj });        }        [HttpPost]        [ValidateAntiForgeryToken]        public IActionResult Upsert(Category category)
+        {
+            if (ModelState.IsValid)
+            {
+                if (category.Id == 0)
+                {
+                    _unitOfWork.Category.Add(category);
+                }
+                else
+                {
+                    _unitOfWork.Category.Update(category);
+                }
+                _unitOfWork.Save();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(category);
+        }        [HttpDelete]        public IActionResult Delete(int id)
+        {
+            var objFromDB = _unitOfWork.Category.Get(id);
+            if(objFromDB == null)
+            {
+                return Json(new { success = false, message = "Error while deleting" });
+            }
+            _unitOfWork.Category.Remove(objFromDB);
+            _unitOfWork.Save();
+            return Json(new { success = true, message = "Delete successful" });
+        }
+
+
+        #endregion    }}
