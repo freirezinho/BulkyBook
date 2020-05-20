@@ -13,28 +13,38 @@ namespace BulkyBook.DataAccess.Migrations
                                         SELECT * FROM CoverTypes;
                                     END");
 
-            migrationBuilder.Sql(@"CREATE PROCEDURE usp_GetCoverType(IN id INT)
+            migrationBuilder.Sql(@"CREATE PROCEDURE usp_GetCoverType
+                                    (
+                                        id int
+                                    )
                                     BEGIN 
-                                     SELECT * FROM CoverTypes  WHERE Id = id;
-                                    END ");
+                                     SELECT * FROM CoverTypes WHERE CoverTypes.Id=id;
+                                    END;");
 
-            migrationBuilder.Sql(@"CREATE PROCEDURE usp_UpdateCoverType(IN id INT, IN name VARCHAR(100))
+            migrationBuilder.Sql(@"CREATE PROCEDURE usp_UpdateCoverType
+                                    (
+                                        id int,
+                                        name varchar(100)
+                                    )
                                     BEGIN 
-                                     UPDATE CoverTypes
-                                     SET  Name = name
-                                     WHERE  Id = id;
+                                     UPDATE CoverTypes SET  CoverTypes.Name = name
+                                     WHERE  CoverTypes.Id = id;
                                     END");
 
-            migrationBuilder.Sql(@"CREATE PROCEDURE usp_DeleteCoverType(IN id INT)
+            migrationBuilder.Sql(@"CREATE PROCEDURE usp_DeleteCoverType
+                                    (
+                                        id int
+                                    )
                                     BEGIN 
-                                     DELETE FROM CoverTypes
-                                     WHERE  Id = id;
+                                     DELETE FROM CoverTypes WHERE CoverTypes.Id = id;
                                     END");
 
-            migrationBuilder.Sql(@"CREATE PROCEDURE usp_CreateCoverType(IN name VARCHAR(100))
+            migrationBuilder.Sql(@"CREATE PROCEDURE usp_CreateCoverType
+                                   (
+                                        name varchar(100)
+                                   )
                                    BEGIN 
-                                    INSERT INTO CoverTypes(name)
-                                    VALUES (name);
+                                    INSERT INTO CoverTypes(name) VALUES (name);
                                    END");
         }
 
